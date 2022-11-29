@@ -26,8 +26,7 @@ code {
 .lables {
   display: inline-block;
   position: relative;
-  right: 155px;
-  top: -1rem;
+  top: -0.5rem;
   color: brown;
   font-size: 0.8rem;
   width: 150px;
