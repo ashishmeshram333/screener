@@ -81,20 +81,27 @@ let defaultBalanceSheet = {
 
       otherNonCurrentAssets: "None",
 
+      
+      
       totalLiabilities: "113005000000",
+
       totalCurrentLiabilities: "33619000000",
+
       currentAccountsPayable: "3955000000",
       deferredRevenue: "16095000000",
       currentDebt: "13551000000",
       shortTermDebt: "6787000000",
+      
       totalNonCurrentLiabilities: "90188000000",
       capitalLeaseObligations: "63000000",
+      
       longTermDebt: "56193000000",
       currentLongTermDebt: "6728000000",
       longTermDebtNoncurrent: "44917000000",
       shortLongTermDebtTotal: "110496000000",
       otherCurrentLiabilities: "9386000000",
       otherNonCurrentLiabilities: "13996000000",
+      
       totalShareholderEquity: "18901000000",
       treasuryStock: "169392000000",
       retainedEarnings: "154209000000",
