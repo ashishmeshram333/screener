@@ -59,20 +59,20 @@ let defaultBalanceSheet = {
 
       totalAssets: "132001000000",
 
-      totalCurrentAssets: "29539000000",
+      totalCurrentAssets: "29539000000",//29539
+
       cashAndCashEquivalentsAtCarryingValue: "6650000000",
       cashAndShortTermInvestments: "6650000000",
       inventory: "1649000000",
       currentNetReceivables: "14977000000",
-      totalNonCurrentAssets: "101786000000",
+
+      totalNonCurrentAssets: "101786000000",//101786
 
       propertyPlantEquipment: "5694000000",
       accumulatedDepreciationAmortizationPPE: "14390000000",
-
       intangibleAssets: "68154000000",
       intangibleAssetsExcludingGoodwill: "12511000000",
       goodwill: "55643000000",
-
       investments: "199000000",
       longTermInvestments: "159000000",
       shortTermInvestments: "600000000",
@@ -83,16 +83,16 @@ let defaultBalanceSheet = {
 
       
       
-      totalLiabilities: "113005000000",
+      totalLiabilities: "113005000000", //113005
 
-      totalCurrentLiabilities: "33619000000",
+      totalCurrentLiabilities: "33619000000",//33619
 
       currentAccountsPayable: "3955000000",
       deferredRevenue: "16095000000",
       currentDebt: "13551000000",
-      shortTermDebt: "6787000000",
-      
-      totalNonCurrentLiabilities: "90188000000",
+
+      shortTermDebt: "6787000000",      
+      totalNonCurrentLiabilities: "90188000000", //90188
       capitalLeaseObligations: "63000000",
       
       longTermDebt: "56193000000",
@@ -102,7 +102,7 @@ let defaultBalanceSheet = {
       otherCurrentLiabilities: "9386000000",
       otherNonCurrentLiabilities: "13996000000",
       
-      totalShareholderEquity: "18901000000",
+      totalShareholderEquity: "18901000000",//18901
       treasuryStock: "169392000000",
       retainedEarnings: "154209000000",
       commonStock: "57319000000",
