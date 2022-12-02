@@ -106,12 +106,12 @@ export default function BalanceSheetChart() {
   const assetsDataset = [];
   const liabilitiesDataset = [];
   
-  const assets = (({ totalCurrentAssets , intangibleAssets, investments, otherCurrentAssets,propertyPlantEquipment,goodwill }) => 
-    ({ totalCurrentAssets , intangibleAssets, investments, otherCurrentAssets,propertyPlantEquipment,goodwill }))(latest);
+  const assets = (({ totalCurrentAssets, totalNonCurrentAssets }) => 
+    ({ totalCurrentAssets, totalNonCurrentAssets}))(latest);
 
 
-  const liabilities = (({ totalLiabilities , totalShareholderEquity }) => 
-    ({ totalLiabilities ,totalShareholderEquity }))(latest);
+  const liabilities = (({ totalCurrentLiabilities ,totalNonCurrentLiabilities, totalShareholderEquity }) => 
+    ({ totalCurrentLiabilities ,totalNonCurrentLiabilities, totalShareholderEquity }))(latest);
 
   Object.keys(assets).forEach((e,i) => assetsDataset.push(
     {
@@ -144,13 +144,13 @@ export default function BalanceSheetChart() {
   };
 
   const getLiabilitiesChartHeight = (val) => {    
-    return val * 100 / convertMillions(latest.totalLiabilities);
+    return val * 100 / convertMillions(latest.totalLiabilities + latest.totalShareholderEquity);
   };
 
   const graphAssetItemStyle = (item,idx) => {    
     return  {
     backgroundColor:assetColors[idx],
-    height: getAssetsChartHeight(item.data) + 'px',
+    height: getAssetsChartHeight(item.data) + '%',
     fontSize: "1rem",
     color:'#E2DFD2',
     textAlign:"center",
@@ -161,7 +161,7 @@ export default function BalanceSheetChart() {
   const graphLiabilityItemStyle = (item,idx) => {    
     return  {
     backgroundColor:liabilitiesColors[idx],
-    height: getAssetsChartHeight(item.data) + 'px',
+    height: getAssetsChartHeight(item.data) + '%',
     fontSize: "1rem",
     color:'#E2DFD2',
     textAlign:"center",
@@ -172,7 +172,7 @@ export default function BalanceSheetChart() {
 
   const graphLabelsStyle = (item,idx) => {    
     return  {
-    height: getAssetsChartHeight(item.data) + 'px',
+    height: getAssetsChartHeight(item.data) + '%',
     fontSize: "0.7rem",
     color:'#E2DFD2',
     textAlign:"center",
@@ -188,8 +188,8 @@ export default function BalanceSheetChart() {
           subheaderTypographyProps={subTitleStyles}
         ></Header>
         <Content>
-      <Grid container spacing={2} columns={16} sx={{height:'21rem'}} display="true">
-        <Grid item xs={5} flexDirection="column">
+      <Grid container spacing={2} columns={16} display="true">
+        <Grid item xs={5} flexDirection="column" sx={{height:'20rem'}}>
           {assetsDataset.map((item, index) => (
               <Grid key={index} sx={graphLabelsStyle(item, index)}>
                 <span>{ getAssetsChartHeight(item.data) > 5 ? item.label : '' }</span>
@@ -197,7 +197,7 @@ export default function BalanceSheetChart() {
             ))}
         </Grid>
         <Grid item xs={3}>
-          <Grid container spacing={1} flexDirection="column" >
+          <Grid container spacing={1} flexDirection="column" sx={{height:'20rem'}}>
             {assetsDataset.map((item, index) => (
               <Grid key={index} sx={graphAssetItemStyle(item, index)}>
                 <span>{ getAssetsChartHeight(item.data) > 5 ? item.data : '' }</span>
@@ -206,7 +206,7 @@ export default function BalanceSheetChart() {
           </Grid>
         </Grid>
         <Grid item xs={3}>
-          <Grid container spacing={1} flexDirection="column" >
+          <Grid container spacing={1} flexDirection="column" sx={{height:'20rem'}}>
             {liabilitiesDataset.map((item, index) => (
               <Grid key={index} sx={graphLiabilityItemStyle(item, index)}>
                 <span>{ getLiabilitiesChartHeight(item.data) > 5 ? item.data : '' }</span>
@@ -214,7 +214,7 @@ export default function BalanceSheetChart() {
             ))}
           </Grid>
         </Grid>
-        <Grid item xs={5} flexDirection="column">
+        <Grid item xs={5} flexDirection="column" sx={{height:'20rem'}}>
           {liabilitiesDataset.map((item, index) => (
               <Grid key={index} sx={graphLabelsStyle(item, index)}>
                 <span>{ getLiabilitiesChartHeight(item.data) > 5 ? item.label : '' }</span>
