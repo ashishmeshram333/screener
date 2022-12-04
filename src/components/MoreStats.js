@@ -1,5 +1,5 @@
 import * as React from "react";
-import Typography from "@mui/material/Typography";
+import { Typography } from "@mui/material";
 import { convertToCurrency, company } from "../utils.js";
 
 export default function MoreStats(props) {

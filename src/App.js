@@ -12,6 +12,7 @@ import {
 
 import React, { useEffect, useState } from "react";
 import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Grid";
 import Navbar from "./components/layout/navbar";
 import { styled, createTheme, ThemeProvider } from "@mui/system";
 import CompanyName from "./components/CompanyName";
@@ -20,6 +21,7 @@ import Ratios from "./components/Ratios";
 import MoreStats from "./components/MoreStats";
 import SalesChart from "./components/SalesChart";
 import BalanceSheetChart from "./components/BalanceSheetChart";
+import IncomeChart from "./components/IncomeChart";
 
 const theme = createTheme({
   palette: {
@@ -49,16 +51,18 @@ function App() {
             <Stats></Stats>
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={4}>
-            <BalanceSheetChart />
+            <Box sx={{height:500}}>Need to display Price Chart here</Box>
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={4}>
             <Ratios />
           </Grid>
         </Grid>
-
         <Grid container spacing={1} columns={12}>
-          <Grid item>
-            <MoreStats></MoreStats>
+          <Grid item xs={12} sm={12} md={6} lg={6}>
+            <BalanceSheetChart />
+          </Grid>
+          <Grid item xs={12} sm={12} md={6} lg={6}>
+            <IncomeChart />
           </Grid>
         </Grid>
       </Container>

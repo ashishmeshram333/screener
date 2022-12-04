@@ -1073,6 +1073,111 @@ let defaultBalanceSheet = {
   ],
 };
 
+let defaultIncomeStatement = {
+  "symbol": "IBM",
+  "annualReports": [
+      {
+          "fiscalDateEnding": "2021-12-31",
+          "reportedCurrency": "USD",
+          "grossProfit": "31486000000",
+          "totalRevenue": "57350000000",
+          "costOfRevenue": "25865000000",
+          "costofGoodsAndServicesSold": "300000000",
+          "operatingIncome": "4786000000",
+          "sellingGeneralAndAdministrative": "18745000000",
+          "researchAndDevelopment": "6488000000",
+          "operatingExpenses": "26700000000",
+          "investmentIncomeNet": "None",
+          "netInterestIncome": "-1155000000",
+          "interestIncome": "52000000",
+          "interestExpense": "1155000000",
+          "nonInterestIncome": "None",
+          "otherNonOperatingIncome": "-873000000",
+          "depreciation": "3888000000",
+          "depreciationAndAmortization": "2529000000",
+          "incomeBeforeTax": "5867000000",
+          "incomeTaxExpense": "124000000",
+          "interestAndDebtExpense": "1155000000",
+          "netIncomeFromContinuingOperations": "4712000000",
+          "comprehensiveIncomeNetOfTax": "11299000000",
+          "ebit": "7022000000",
+          "ebitda": "9551000000",
+          "netIncome": "5743000000"
+      },
+      {
+          "fiscalDateEnding": "2020-12-31",
+          "reportedCurrency": "USD",
+          "grossProfit": "30865000000",
+          "totalRevenue": "55179000000",
+          "costOfRevenue": "24314000000",
+          "costofGoodsAndServicesSold": "439000000",
+          "operatingIncome": "4609000000",
+          "sellingGeneralAndAdministrative": "20561000000",
+          "researchAndDevelopment": "6262000000",
+          "operatingExpenses": "30966000000",
+          "investmentIncomeNet": "None",
+          "netInterestIncome": "-1288000000",
+          "interestIncome": "105000000",
+          "interestExpense": "1288000000",
+          "nonInterestIncome": "None",
+          "otherNonOperatingIncome": "-861000000",
+          "depreciation": "4227000000",
+          "depreciationAndAmortization": "2468000000",
+          "incomeBeforeTax": "4230000000",
+          "incomeTaxExpense": "-1360000000",
+          "interestAndDebtExpense": "1288000000",
+          "netIncomeFromContinuingOperations": "3932000000",
+          "comprehensiveIncomeNetOfTax": "4850000000",
+          "ebit": "5518000000",
+          "ebitda": "7986000000",
+          "netIncome": "5590000000"
+      },
+      {
+          "fiscalDateEnding": "2019-12-31",
+          "reportedCurrency": "USD",
+          "grossProfit": "31533000000",
+          "totalRevenue": "57714000000",
+          "costOfRevenue": "26181000000",
+          "costofGoodsAndServicesSold": "591000000",
+          "operatingIncome": "9004000000",
+          "sellingGeneralAndAdministrative": "18724000000",
+          "researchAndDevelopment": "5910000000",
+          "operatingExpenses": "27484000000",
+          "investmentIncomeNet": "None",
+          "netInterestIncome": "-1344000000",
+          "interestIncome": "349000000",
+          "interestExpense": "1344000000",
+          "nonInterestIncome": "None",
+          "otherNonOperatingIncome": "968000000",
+          "depreciation": "4209000000",
+          "depreciationAndAmortization": "1850000000",
+          "incomeBeforeTax": "9491000000",
+          "incomeTaxExpense": "60000000",
+          "interestAndDebtExpense": "1344000000",
+          "netIncomeFromContinuingOperations": "7146000000",
+          "comprehensiveIncomeNetOfTax": "10324000000",
+          "ebit": "10835000000",
+          "ebitda": "12685000000",
+          "netIncome": "9431000000"
+      }
+  ]
+}
+
+export const fromToMapForIncomeStatementSankeyChart = [ 
+  ["totalRevenue", "costOfRevenue"],
+  ["totalRevenue", "grossProfit"],
+  ["grossProfit", "operatingExpenses"],
+  ["grossProfit", "operatingIncome"],
+  ["operatingExpenses", "sellingGeneralAndAdministrative"],
+  ["operatingExpenses", "researchAndDevelopment"],
+  ["operatingExpenses", "depreciationAndAmortization"],
+  ["operatingIncome", "incomeTaxExpense"],
+  ["operatingIncome", "interestExpense"],
+  ["operatingIncome", "incomeBeforeTax"],
+  ["operatingIncome", "netIncomeFromContinuingOperations"],
+  ];
+
+
 export const ticker = atom({
   key: "ticker",
   default: "MSFT",
@@ -1081,6 +1186,11 @@ export const ticker = atom({
 export const company = atom({
   key: "company",
   default: defaultCompany,
+});
+
+export const incomeStatement = atom({
+  key: "incomeStatement",
+  default: defaultIncomeStatement,
 });
 
 export const balanceSheet = atom({

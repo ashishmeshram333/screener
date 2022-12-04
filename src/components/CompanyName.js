@@ -1,7 +1,7 @@
 import * as React from "react";
 import Grid from "@mui/material/Grid";
 import Chip from "@mui/material/Chip";
-import Typography from "@mui/material/Typography";
+import { Typography } from "@mui/material";
 import { useRecoilValue } from "recoil";
 import { company as companyState } from "../states";
 
