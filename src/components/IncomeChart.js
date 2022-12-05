@@ -61,10 +61,22 @@ export default function IncomeChart() {
   
     const [currentStatement, setCurrentStatement] = useState(incomeStatement.annualReports[0]);
     const [currentYear, setCurrentYear] = useState(incomeStatement.annualReports[0].fiscalDateEnding);
-    //const [currentReportType, setCurrentReportType] = useState("Annual");
+    const [isAnnual, setAnnual] = useState(true);
 
-    const setFiscalDate = (year) => {
+    const setFiscalYear = (year) => {
         setCurrentYear(year);
+    };
+
+    const setQuarterly = () =>
+    {
+        setAnnual(false);
+        setCurrentYear(incomeStatement.quarterlyReports[0].fiscalDateEnding)
+    };
+
+    const setAnnually = () =>
+    {
+        setAnnual(true);
+        setCurrentYear(incomeStatement.annualReports[0].fiscalDateEnding)
     };
 
     const setDataSetForChart = () => {
@@ -75,14 +87,17 @@ export default function IncomeChart() {
          );          
     }
 
-  useEffect(() => {    
-    let statement = incomeStatement.annualReports.find(report => {
+  useEffect(() => { 
+    console.log('useEffect was called. Fiscal year = ' + currentYear);
+    let reports = isAnnual ? incomeStatement.annualReports : incomeStatement.quarterlyReports;  
+    
+    let statement = reports.find(report => {
         return report.fiscalDateEnding === currentYear;
     });
+    console.log(statement);
     setCurrentStatement(statement);
-    setDataSetForChart();
-    
-  }, [currentYear]);
+    setDataSetForChart();    
+  });
 
   return (
     <Card variant="outlined" raised="true">
@@ -94,22 +109,35 @@ export default function IncomeChart() {
         ></Header>
         <Content>
             <Stack direction="row" spacing={1} sx={{marginBottom: '1rem'}}>
-                <Chip color="success" size="small" label="Annual" sx={{height:'1.2rem',fontSize: '0.7rem'}}
-                    //onClick={setCurrentReportType("Annual")}
-                    variant="outlined" />
+                <Chip color="success" size="small" label="Annual" sx={{height:'1.2rem',fontSize: '0.7rem'}}                
+                    variant={isAnnual ? "filled" : "outlined" }
+                    //clickable = {!isAnnual}
+                    onClick={() => setAnnually()}/>
                 
                 <Chip color="success" size="small" label="Quarterly" sx={{height:'1.2rem',fontSize: '0.7rem'}}
-                //onClick={setCurrentReportType("Quarterly")}
-                />
-
+                    variant={isAnnual ? "outlined" : "filled" }
+                    //clickable = {isAnnual}
+                    onClick={() => setQuarterly()}
+                    />
+                    { isAnnual ? 
                     <Stack direction="row" spacing={1} sx={{marginBottom: '1rem'}}>
-                        {incomeStatement.annualReports.map((year) =>
+                        {incomeStatement.annualReports.slice(0, 5).map((year) =>
                             <Chip key={year.fiscalDateEnding} label={year.fiscalDateEnding} color="info" size="small" sx={{height:'1.2rem',fontSize: '0.7rem'}}
                                 variant={currentYear === year.fiscalDateEnding ? "filled" : "outlined" }
                                 clickable = {currentYear != year.fiscalDateEnding}
-                                onClick={() => setFiscalDate(year.fiscalDateEnding)}/>
+                                onClick={() => setFiscalYear(year.fiscalDateEnding)}/>
                         )}
                     </Stack>
+                    :
+                    <Stack direction="row" spacing={1} sx={{marginBottom: '1rem'}}>
+                        {incomeStatement.quarterlyReports.slice(0, 5).map((year) =>
+                            <Chip key={year.fiscalDateEnding} label={year.fiscalDateEnding} color="info" size="small" sx={{height:'1.2rem',fontSize: '0.7rem'}}
+                                variant={currentYear === year.fiscalDateEnding ? "filled" : "outlined" }
+                                clickable = {currentYear != year.fiscalDateEnding}
+                                onClick={() => setFiscalYear(year.fiscalDateEnding)}/>
+                        )}
+                    </Stack>
+                    }
             </Stack>
             <Chart
             chartType="Sankey"    
