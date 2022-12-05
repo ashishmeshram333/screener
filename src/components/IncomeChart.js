@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Chart } from "react-google-charts";
-import {Card, CardContent,CardHeader, Box } from "@mui/material";
+import {Card, CardContent,CardHeader } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { toSentenceCase } from "../utils.js";
 import { fromToMapForIncomeStatementSankeyChart as fromToMap, } from "../states";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue,useRecoilState } from "recoil";
 import { incomeStatement as incomeStatementState } from "../states";
-
+import Chip from '@mui/material/Chip';
+import Stack from '@mui/material/Stack';
 
 const Header = styled(CardHeader)(({ theme }) => ({
     padding: "5px",
@@ -28,61 +29,61 @@ const Header = styled(CardHeader)(({ theme }) => ({
      color:"grey" 
   }
 
+  var colors = ['#64b5f6', '#b2df8a', '#6aa84f', '#fdbf6f',
+  '#557153', '#1f78b4', '#33a02c'];
+
+  const data = [["From", "To", "Weight"]];
+
+  var options = {
+    height: 400,
+    sankey: {
+        node: {
+        colors: colors,
+        width:20,
+        label: {
+            fontSize: 12,
+            color: '#003333',
+        },
+      
+        },
+        link: {
+            color: {
+              fill: '#dee2e6',     // Color of the link.
+              fillOpacity: 0.8, // Transparency of the link.
+            }
+          }
+    }
+};
+
 export default function IncomeChart() {
     
     const incomeStatement = useRecoilValue(incomeStatementState);
-    let currentStatement = incomeStatement.annualReports[0];
+  
+    const [currentStatement, setCurrentStatement] = useState(incomeStatement.annualReports[0]);
+    const [currentYear, setCurrentYear] = useState(incomeStatement.annualReports[0].fiscalDateEnding);
+    //const [currentReportType, setCurrentReportType] = useState("Annual");
 
-    const dataArr = [["From", "To", "Weight"]];
-    
-
-    fromToMap.map(fromTo =>
-            dataArr.push([toSentenceCase(fromTo[0]),toSentenceCase(fromTo[1]),Number(currentStatement[fromTo[1]])])
-         );
-
-    dataArr.map(item =>
-        console.log(item)
-        );
-    
-    const data = [
-            ["From", "To", "Weight"],
-            ['Revenue', 'Cost of Revenue', 25865],
-            ['Revenue', 'Gross Profit', 31486],
-            ['Gross Profit', 'Operating Expense', 24654],
-            ['Gross Profit', 'Operating Income', 6832],
-            ['Operating Expense', 'Selling/General/Admin. Expenses', 18608],
-            ['Operating Expense', 'Research & Development', 6488],
-            ['Operating Expense', 'Depreciation / Amortization', 435],
-            ['Operating Income', 'Tax Provision', 124],
-            ['Operating Income', 'Pre-Tax Income', 4837],        
-            ['Operating Income', 'Interest Expense', 1155],        
-            ['Operating Income', 'Net Non Operating Interest Income Expenses', 890],
-        ];
-
-    var colors = ['#64b5f6', '#b2df8a', '#6aa84f', '#fdbf6f',
-        '#557153', '#1f78b4', '#33a02c'];
-
-    var options = {
-        height: 400,
-        sankey: {
-            node: {
-            colors: colors,
-            width:20,
-            label: {
-                fontSize: 12,
-                color: '#003333',
-            },
-          
-            },
-            link: {
-                color: {
-                  fill: '#dee2e6',     // Color of the link.
-                  fillOpacity: 0.8, // Transparency of the link.
-                }
-              }
-        }
+    const setFiscalDate = (year) => {
+        setCurrentYear(year);
     };
-      
+
+    const setDataSetForChart = () => {
+        data.splice(0, data.length);
+        data.push(["From", "To", "Weight"]);
+        fromToMap.map(fromTo =>
+            data.push([toSentenceCase(fromTo[0]),toSentenceCase(fromTo[1]),Number(currentStatement[fromTo[1]])])
+         );          
+    }
+
+  useEffect(() => {    
+    let statement = incomeStatement.annualReports.find(report => {
+        return report.fiscalDateEnding === currentYear;
+    });
+    setCurrentStatement(statement);
+    setDataSetForChart();
+    
+  }, [currentYear]);
+
   return (
     <Card variant="outlined" raised="true">
         <Header
@@ -92,12 +93,29 @@ export default function IncomeChart() {
           subheaderTypographyProps={subTitleStyles}
         ></Header>
         <Content>
-      
-    <Chart
-      chartType="Sankey"    
-      data={dataArr}
-      options={options}
-    />
+            <Stack direction="row" spacing={1} sx={{marginBottom: '1rem'}}>
+                <Chip color="success" size="small" label="Annual" sx={{height:'1.2rem',fontSize: '0.7rem'}}
+                    //onClick={setCurrentReportType("Annual")}
+                    variant="outlined" />
+                
+                <Chip color="success" size="small" label="Quarterly" sx={{height:'1.2rem',fontSize: '0.7rem'}}
+                //onClick={setCurrentReportType("Quarterly")}
+                />
+
+                    <Stack direction="row" spacing={1} sx={{marginBottom: '1rem'}}>
+                        {incomeStatement.annualReports.map((year) =>
+                            <Chip key={year.fiscalDateEnding} label={year.fiscalDateEnding} color="info" size="small" sx={{height:'1.2rem',fontSize: '0.7rem'}}
+                                variant={currentYear === year.fiscalDateEnding ? "filled" : "outlined" }
+                                clickable = {currentYear != year.fiscalDateEnding}
+                                onClick={() => setFiscalDate(year.fiscalDateEnding)}/>
+                        )}
+                    </Stack>
+            </Stack>
+            <Chart
+            chartType="Sankey"    
+            data={data}
+            options={options}
+            />
     </Content>
       </Card>      
   );
