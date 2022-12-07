@@ -61,13 +61,7 @@ export const convertToCurrency = (labelValue) => {
 };
 
 export const convertMillions = (labelValue) => {
-  // Nine Zeroes for Billions
-  return Math.abs(Number(labelValue)) >= 1.0e9
-    ? (Math.abs(Number(labelValue)) / 1.0e9).toFixed(1)
-    : // Six Zeroes for Millions
-    Math.abs(Number(labelValue)) >= 1.0e6
-    ? (Math.abs(Number(labelValue)) / 1.0e6).toFixed(1)
-    : Math.abs(Number(labelValue));
+  return (Math.abs(Number(labelValue)) / 1.0e6).toFixed(1)  
 };
 
 export const toSentenceCase = (camelCase) => {
@@ -77,3 +71,13 @@ export const toSentenceCase = (camelCase) => {
   }
   return "";
 };
+
+export const sankeyColorPallet = [
+  "#64b5f6",
+  "#b2df8a",
+  "#6aa84f",
+  "#fdbf6f",
+  "#557153",
+  "#1f78b4",
+  "#33a02c",
+];
