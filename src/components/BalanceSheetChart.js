@@ -200,7 +200,7 @@ export default function BalanceSheetChart() {
           subheaderTypographyProps={subTitleStyles}
         ></Header>
         <Content>
-      <Grid container spacing={2} columns={16}display="true">
+      <Grid container spacing={2} columns={16} sx={{paddingTop:'8px'}}>
         <Grid item xs={5} flexDirection="column" sx={{height:'21rem'}}>
           {assetsDataset.map((item, index) => (
               <Grid key={index} sx={graphLabelsStyle(item, index)}>

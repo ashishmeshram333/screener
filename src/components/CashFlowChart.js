@@ -93,20 +93,20 @@ const data = {
   };
 
   const options = {
-    type: 'bar',
-    data: data,
-    options: {      
-      scales: {
-        xAxes: [{
-          stacked: true
-        }],
-        yAxes: [{
-          stacked: true
-        }]
-      },
-      responsive: true,
-      maintainAspectRatio: false
-    }
+    scales: {
+            x: {
+              stacked: true,
+              grid: {
+                display: false
+              }
+            },
+            y: {
+              stacked: true,
+              grid: {
+                display: true
+              }
+            }
+        }
   };
   
   return (
@@ -118,8 +118,8 @@ const data = {
         subheaderTypographyProps={subTitleStyles}
       ></Header>
       <Content>
-      <Box>
-        <Bar options={options} data={options.data} />
+      <Box sx={{height: '21rem'}}>
+        <Bar options={options} data={data} />
       </Box>
       </Content>
     </Card>

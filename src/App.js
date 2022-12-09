@@ -63,10 +63,10 @@ function App() {
             <BalanceSheetChart />
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
-            <IncomeChart />
+          <CashFlowChart />
           </Grid>
-          <Grid item xs={12} sm={12} md={6} lg={6}>
-            <CashFlowChart />
+          <Grid item xs={12}>
+            <IncomeChart />
           </Grid>
         </Grid>
       </Container>
