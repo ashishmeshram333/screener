@@ -22,6 +22,7 @@ import MoreStats from "./components/MoreStats";
 import SalesChart from "./components/SalesChart";
 import BalanceSheetChart from "./components/BalanceSheetChart";
 import IncomeChart from "./components/IncomeChart";
+import CashFlowChart from "./components/CashFlowChart";
 
 const theme = createTheme({
   palette: {
@@ -63,6 +64,9 @@ function App() {
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
             <IncomeChart />
+          </Grid>
+          <Grid item xs={12} sm={12} md={6} lg={6}>
+            <CashFlowChart />
           </Grid>
         </Grid>
       </Container>

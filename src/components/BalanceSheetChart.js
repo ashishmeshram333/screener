@@ -53,8 +53,8 @@ const subTitleStyles = {
 
 
 const assetColors = [  
-  '#CFF3FC',
-  '#e7f9fe'  
+  '#e0f3f0',
+  '#A9DDD6'  
 ]
 
 

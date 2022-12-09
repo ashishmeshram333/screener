@@ -1,7 +1,9 @@
 .App {
   text-align: center;
 }
-
+#root {
+  background:#F7F9F9; /* rgba(0, 0, 0, 0.08); */
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -59,4 +61,16 @@
   justify-content: space-between;
   padding: 0.5rem;
   font-weight: 500;
+}
+
+
+.tag {
+  display: inline-block;
+  padding: 3px 4px;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.08);
+  margin: .25em .1em;
+  font-size: .7em;
+  letter-spacing: .15ch;
+  font-weight: 400
 }

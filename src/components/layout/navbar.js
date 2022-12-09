@@ -56,23 +56,14 @@ export default function SearchAppBar(props) {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" sx={{ backgroundColor: "grey" }}>
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography
+        <Typography
             variant="h6"
             noWrap
             component="div"
             sx={{ display: { xs: "none", sm: "block" }, width: "300px" }}
           >
-            {props.ticker}
-          </Typography>
+            WORKING TITLE
+          </Typography>         
           <Search>
             <SearchIconWrapper>
               <SearchIcon />
