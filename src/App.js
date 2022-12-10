@@ -23,6 +23,7 @@ import SalesChart from "./components/SalesChart";
 import BalanceSheetChart from "./components/BalanceSheetChart";
 import IncomeChart from "./components/IncomeChart";
 import CashFlowChart from "./components/CashFlowChart";
+import IncomeTable from "./components/IncomeTable";
 
 const theme = createTheme({
   palette: {
@@ -46,7 +47,7 @@ function App() {
     <RecoilRoot>
       <Container component="main">
         <Navbar></Navbar>
-        <CompanyName></CompanyName>
+        <CompanyName></CompanyName>        
         <Grid container spacing={1} columns={12}>
           <Grid item xs={12} sm={12} md={6} lg={4}>
             <Stats></Stats>
@@ -67,6 +68,9 @@ function App() {
           </Grid>
           <Grid item xs={12}>
             <IncomeChart />
+          </Grid>
+          <Grid item xs={12}>
+            <IncomeTable />
           </Grid>
         </Grid>
       </Container>
