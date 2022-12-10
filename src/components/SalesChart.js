@@ -1,5 +1,10 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
+import { useRecoilValue, useRecoilState } from "recoil";
+import { incomeStatement as incomeStatementState } from "../states";
+import { toSentenceCase,convertMillions } from "../utils.js";
+import { Card, CardContent, CardHeader } from "@mui/material";
+import { styled } from "@mui/material/styles";
 
 import {
   Chart as ChartJS,
@@ -25,48 +30,115 @@ ChartJS.register(
   Legend
 );
 
-const options = {
-  type: "line",
-  showScale: false,
-  data: {
-    labels: ["2018", "2019", "2020", "2021", "2022"],
+const Header = styled(CardHeader)(({ theme }) => ({
+  padding: "5px",
+}));
 
-    datasets: [
-      {
-        label: "Revenue",
-        showScale: false,
-        fill: false,
-        data: ["5000", "8000", "10000", "14000", "17000"],
-        borderColor: "rgb(75, 192, 192)",
-        tension: 0.1,
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
-        stack: "Stack 0",
-        barThickness: 20,
-      },
-    ],
-  },
-  scales: {
-    x: {
-      grid: {
-        display: false,
-      },
-    },
-    y: {
-      grid: {
-        display: false,
-      },
-    },
-  },
+const Content = styled(CardContent)(({ theme }) => ({
+  paddingTop: "0",
+  paddingBottom: "0",
+  margin: "0",
+}));
+
+const TitleStyles = {
+  fontSize: "0.7rem",
+  color: "orange",
+};
+
+const subTitleStyles = {
+  fontSize: "0.6rem",
+  color: "grey",
 };
 
 export default function SalesChart() {
+
+  const incomeStatement = useRecoilValue(incomeStatementState);
+
+
+  const years = [];
+  const revenue = []; 
+  const operatingProfit = [];
+  const netProfit = [];
+
+  incomeStatement.annualReports.slice(0,5).map((year) => {
+    years.push(year.fiscalDateEnding.substring(0, 4));
+    revenue.push(convertMillions(year.totalRevenue));
+    operatingProfit.push(convertMillions(year.operatingIncome));
+    netProfit.push(convertMillions(year.netIncome));
+  });
+
+  const data = {
+    labels: years,
+    datasets: [
+      {
+        label: 'Revenue',
+        data:  revenue,
+        backgroundColor: '#ADD8E6', //7CB9E8
+      },
+      {
+        label: 'Gross Profit',
+        data:  operatingProfit,
+        backgroundColor: '#ADC2AD',
+      },
+      {
+        label: 'Net Profit',
+        data:  netProfit,
+        backgroundColor: '#0B7A75',
+      }
+    ]
+  };
+
+  const config = {
+    type: 'bar',
+    data: data,
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+            display: false,
+            labels: {
+                color: 'rgb(255, 99, 132)'
+            }
+        }
+    }
+    }
+  };
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+          display: true,
+          position: 'bottom'
+      }
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false
+        }
+      },
+      y: {
+        grid: {
+          display: true
+        }
+      }
+  }
+  };
+
   return (
-    <Box
-      sx={{
-        width: 300,
-      }}
-    >
-      <Bar options={options} data={options.data} />
-    </Box>
+    <Card variant="outlined" raised="true">
+    <Header
+      title="REVENUE AND PROFIT"
+      titleTypographyProps={TitleStyles}
+      subheader="$million"
+      subheaderTypographyProps={subTitleStyles}
+    ></Header>
+    <Content>
+      <Box>
+        <Bar options={options} data={data} />
+      </Box>
+    </Content>
+  </Card>    
   );
 }

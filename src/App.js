@@ -52,7 +52,7 @@ function App() {
             <Stats></Stats>
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={4}>
-            <Box sx={{height:500}}>Need to display Price Chart here</Box>
+            <Box><SalesChart></SalesChart></Box>
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={4}>
             <Ratios />
