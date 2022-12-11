@@ -78,16 +78,19 @@ const data = {
         label: 'Operations',
         data:  operation,
         backgroundColor: '#439A86',
+        barPercentage: 0.5,
       },
       {
         label: 'Investments',
         data:  investment,
         backgroundColor: '#40798C',
+        barPercentage: 0.5,
       },
       {
         label: 'Financing',
         data:  finance,
         backgroundColor: '#A9DDD6',
+        barPercentage: 0.5,
       }
     ]
   };

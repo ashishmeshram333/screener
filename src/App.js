@@ -24,6 +24,7 @@ import BalanceSheetChart from "./components/BalanceSheetChart";
 import IncomeChart from "./components/IncomeChart";
 import CashFlowChart from "./components/CashFlowChart";
 import IncomeTable from "./components/IncomeTable";
+import DividendChart from "./components/DividendChart";
 
 const theme = createTheme({
   palette: {
@@ -65,10 +66,15 @@ function App() {
           </Grid>
           <Grid item xs={12} sm={12} md={6} lg={6}>
           <CashFlowChart />
-          </Grid>
-          <Grid item xs={12}>
+          </Grid>          
+        </Grid>
+        <Grid container spacing={1} columns={12}>
+          <Grid item xs={12} sm={12} md={8} lg={8}>
             <IncomeChart />
           </Grid>
+          <Grid item xs={12} sm={12} md={4} lg={4}>
+            <DividendChart />
+          </Grid>          
           <Grid item xs={12}>
             <IncomeTable />
           </Grid>

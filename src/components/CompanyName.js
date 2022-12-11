@@ -24,9 +24,8 @@ export default function CompanyName() {
           </Typography>
         </Grid>
         <Grid item xs={6} md={4}>
-          <div class="tag">{company.Exchange}</div>&nbsp;&nbsp;
+          <Chip label={company.Exchange} /> &nbsp;&nbsp;
           <Chip label={company.Currency} /> &nbsp;&nbsp;
-          <Chip label={company.Sector} /> &nbsp;&nbsp;          
         </Grid>
       </Grid>
     </div>

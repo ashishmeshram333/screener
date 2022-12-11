@@ -32,3 +32,16 @@ code {
   width: 150px;
   text-align: right;
 }
+
+.container {
+  margin-bottom: '1rem' !important;
+}
+
+
+/* CSS HEX 
+--warm-black: #054547ff;
+--deep-jungle-green: #0F595Eff;
+--myrtle-green: #38786Fff;
+--cadet-blue: #76B0B6ff;
+--alice-blue: #DEE8F1ff;
+*/
